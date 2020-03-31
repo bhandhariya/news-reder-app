@@ -1,0 +1,17 @@
+<input type="text" name="" id="" [(ngModel)]="query"  >
+<div style="margin-top: 30px">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div *ngFor="let cartoon of cartoonsData">
+      <input type="checkbox" (change)="onChange(cartoon.val, $event.target.checked)" />
+      {{ cartoon.name }}
+    </div>
+    <button>submit</button>
+  </form>
+  </div>
+
+
+
+
+
+<!-- 
+<button (click)="search()"  >Search</button> -->
