@@ -81,7 +81,7 @@ submit() {
     query:this.query
   }
   console.log(obj)
-  this.http.post('http://localhost:3000/users/getnews',obj).subscribe(this.cb)
+  this.http.post('https://news-reader-venture.herokuapp.com/users/getnews',obj).subscribe(this.cb)
 }
 
 }
