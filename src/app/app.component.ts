@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 
-export interface Cartoon {
+export interface NewsSource {
   id: number;
   name: string;
   val:string;
 }
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   title = 'yoga1';
 
   
-
+  p: number = 1;
+  collection: any[] ;
 
 
 
@@ -33,30 +33,38 @@ this.http.post('http://localhost:3000/users/getnews',{title:this.query}).subscri
 
   }
 
+newsResult;
+
 cb=(res)=>{
-  console.log(res)
+  console.log(res);
+  this.newsResult=res;
+  this.collection = this.newsResult
 }
 
 
 
 form: FormGroup;
-cartoonsData: Cartoon[] = [
+newssource: NewsSource[] = [
   { id: 0, name: 'ABC News', val : 'abc-news' },
   { id: 1, name: 'BBC News', val : 'bbc-news' },
   { id: 2, name: 'BBC Sport' , val : 'bbc-sport' },
-  { id: 3, name: 'ESPN', val : 'espn' }
+  { id: 3, name: 'Business Insider', val : 'business-insider' },
+  { id: 4, name: 'Buzzfeed', val : 'buzzfeed' },
+  { id: 5, name: 'CNBC', val : 'cnbc' },
+  { id: 6, name: 'CNN', val : 'cnn' },
+  { id: 7, name: 'ESPN', val : 'espn' },
 ];
 
 constructor(private fb: FormBuilder,private http:HttpClient) { }
 
 onChange(name: string, isChecked: boolean) {
-  const cartoons = (this.form.controls.name as FormArray);
+  const newssources = (this.form.controls.name as FormArray);
 
   if (isChecked) {
-    cartoons.push(new FormControl(name));
+    newssources.push(new FormControl(name));
   } else {
-    const index = cartoons.controls.findIndex(x => x.value === name);
-    cartoons.removeAt(index);
+    const index = newssources.controls.findIndex(x => x.value === name);
+    newssources.removeAt(index);
   }
 }
 
